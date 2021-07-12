@@ -10,7 +10,7 @@ import com.example.sonetproject.data.User
 import com.example.sonetproject.utility.UserListAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class FragmentList:Fragment(R.layout.fragment_list) {
+class FragmentList:Fragment(R.layout.activity_fragment_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

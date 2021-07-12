@@ -6,7 +6,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.sonetproject.R
 
-class FragmentAdd : Fragment(R.layout.fragment_add) {
+class FragmentAdd : Fragment(R.layout.activity_fragment_add) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
