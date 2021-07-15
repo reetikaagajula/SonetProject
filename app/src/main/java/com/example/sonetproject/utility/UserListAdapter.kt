@@ -1,6 +1,5 @@
 package com.example.sonetproject.utility
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sonetproject.R
 import com.example.sonetproject.data.User
 
-class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
+class UserListAdapter(private val onItemClicked: (position:Int)->Unit) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
     var userList = emptyList<User>()
-    class UserViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class UserViewHolder(itemView: View,private val onItemClicked: (position:Int)->Unit): RecyclerView.ViewHolder(itemView),View.OnClickListener{
+        init{
+            itemView.setOnClickListener(this)
+        }
+        override fun onClick(v:View){
+            val position = adapterPosition
+            onItemClicked(position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        return UserViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row,parent,false))
+        return UserViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row,parent,false),onItemClicked)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {

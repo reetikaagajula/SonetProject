@@ -2,29 +2,23 @@ package com.example.sonetproject.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sonetproject.R
-import com.example.sonetproject.data.User
-import com.example.sonetproject.data.UserData
-import com.example.sonetproject.data.UserDatabase
+import com.example.sonetproject.utility.UserListAdapter
 import com.example.sonetproject.databinding.FragmentListBinding
 import com.example.sonetproject.repository.UserViewModel
-import com.example.sonetproject.utility.UserListAdapter
-import kotlinx.coroutines.launch
 
-class FragmentList:Fragment() {
-    var userAdapter = UserListAdapter()
-    lateinit var viewModel:UserViewModel
-    lateinit var binding:FragmentListBinding
+class FragmentList: Fragment() {
+    var userAdapter = UserListAdapter{position -> onListItemClick(position)}
+    lateinit var viewModel: UserViewModel
+    lateinit var binding: FragmentListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentListBinding.inflate(layoutInflater)
@@ -67,5 +61,12 @@ class FragmentList:Fragment() {
         binding.rcv.adapter = userAdapter
 
 
+
+    }
+    fun onListItemClick(position: Int){
+        val fm = activity?.supportFragmentManager
+        val ft = fm?.beginTransaction()
+        ft?.replace(R.id.fragment,FragmentUpdate(position))
+        ft?.commit()
     }
 }
